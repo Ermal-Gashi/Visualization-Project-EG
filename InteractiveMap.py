@@ -1,20 +1,15 @@
 import geopandas as gpd
-import matplotlib.pyplot as plt
-import geopandas as gpd
-import matplotlib.pyplot as plt
-import matplotlib
-matplotlib.use('TkAgg')  # Switch backend to TkAgg
- 
- 
-import geopandas as gpd
 import folium
 from folium import LayerControl
 from folium.features import GeoJson, GeoJsonTooltip
+import numpy as np
 import seaborn as sns
+
+ 
 
 # File paths
 geojson_with_clusters_path = r"C:\Users\ermal\Desktop\VIzualiztion project\geojson_with_property_clusters.geojson"
-output_map_path = r"C:\Users\ermal\Desktop\VIzualiztion project\interactive_map_with_clusters_and_layers.html"
+output_map_path = r"C:\Users\ermal\Desktop\VIzualiztion project\interactive_map_with_standard_gdp.html"
 
 # Load GeoJSON with clusters
 geo_data = gpd.read_file(geojson_with_clusters_path)
@@ -36,11 +31,11 @@ def add_choropleth(map_obj, geo_data, column, name, fill_color):
         legend_name=f"{name} (in respective units)"
     ).add_to(map_obj)
 
-# Add choropleth layers for GDP, CPI, FDI, and Unemployment
-add_choropleth(m, geo_data, "GDP", "GDP", "YlGnBu")
-add_choropleth(m, geo_data, "CPI", "CPI", "OrRd")
-add_choropleth(m, geo_data, "FDI", "FDI", "PuRd")
-add_choropleth(m, geo_data, "Unemployment", "Unemployment", "YlOrBr")
+# Add choropleth layers
+add_choropleth(m, geo_data, "GDP", "GDP", "YlGnBu")          # Blue-green palette for GDP
+add_choropleth(m, geo_data, "CPI", "CPI", "OrRd")           # Orange-red for CPI
+add_choropleth(m, geo_data, "FDI", "FDI", "PuRd")           # Purple-red for FDI
+add_choropleth(m, geo_data, "Unemployment", "Unemployment", "RdYlGn_r")  # Reversed red-yellow-green for Unemployment
 
 # Add cluster layers dynamically with distinct colors
 cluster_columns = ["GDP_Cluster", "CPI_Cluster", "FDI_Cluster", "Unemployment_Cluster"]
@@ -78,4 +73,4 @@ LayerControl().add_to(m)
 
 # Save the map
 m.save(output_map_path)
-print(f"Interactive map with clusters and layers saved to: {output_map_path}")
+print(f"Interactive map with standard GDP saved to: {output_map_path}")

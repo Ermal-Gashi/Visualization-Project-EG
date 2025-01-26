@@ -14,7 +14,7 @@ from sklearn.cluster import KMeans
 from sklearn.preprocessing import StandardScaler
  
 # File paths
-geojson_path = r"C:\Users\ermal\Desktop\VIzualiztion project\updated_geojson_with_corrected_cpi.geojson"
+geojson_path = r"C:\Users\ermal\Desktop\VIzualiztion project\geojson_with_complete_properties.geojson"
 output_geojson_path = r"C:\Users\ermal\Desktop\VIzualiztion project\geojson_with_property_clusters.geojson"
 
 # Load GeoJSON data
